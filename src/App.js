@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import { useRef } from 'react';
+import Header from "./components/Header/Header";
+import headerImg from "./assets/img/header_img.png";
+import CusNavbar from "./components/Navbar/Navbar";
+import logo from "./assets/img/logo.png";
+import CarzContainer from "./components/Carz/CarzContainer";
+
 
 function App() {
+  const carzSection = useRef(null);
+
+  const goToCarzContainer = () => carzSection.current?.scrollIntoView({ behavior: 'smooth' });
+
+  const login = () => console.log("Login Click");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CusNavbar logo={logo} login={login} />
+      <Header headerImg={headerImg} goToCarzContainer={goToCarzContainer} />
+      <CarzContainer carzSection={carzSection} />
+
     </div>
   );
 }
