@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import PropTypes from 'prop-types';
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Alert, Form } from "react-bootstrap";
 import './CarCard.css';
 
-function CarCard({ image, name, brand, initialPrice, currentBidding, details }) {
+function CarCard({ image, name, brand, initialPrice, currentBidding, details, balance }) {
   const [isDetailVisible, setDetailVisible] = useState(false)
   const [isBidVisible, setBidVisible] = useState(false)
   const [isBuyVisible, setBuyVisible] = useState(false)
@@ -30,26 +30,48 @@ function CarCard({ image, name, brand, initialPrice, currentBidding, details }) 
 
     {isDetailVisible &&
       <div className="car-card-detail">
-        <Button onClick={() => setDetailVisible(!isDetailVisible)} variant="" className="car-card-detail-cancel-btn">X</Button>
+        <Button onClick={() => setDetailVisible(!isDetailVisible)} variant="" className="car-card-cancel-btn">X</Button>
         <p>{details}</p>
       </div>
     }
 
     {isBidVisible &&
-      <div className="car-card-detail">
-        <Button onClick={() => setBidVisible(!isBidVisible)} variant="" className="car-card-detail-cancel-btn">X</Button>
+      <div className="car-card-purchase-detail">
+        <Button onClick={() => setBidVisible(!isBidVisible)} variant="" className="car-card-cancel-btn">X</Button>
+        <p className="car-card-purchase-title">Bid Now</p>
         <p>
-          Bid Now
+          This allows you to bid around initial price
+          <hr />
+          Current bidding: <b>{currentBidding} ALGO</b>
+          <br /><br />
+          Current Balance: <b>{balance} ALGO</b>
         </p>
+        <hr />
+        <Form.Control className="formInput" variant="dark" type="number" id="biddingPrice" placeholder="Bidding price in ALGO" />
+        <br />
+        <Button onClick={() => setBidVisible(!isBidVisible)} variant="" className="car-card-confirm-trans-btn">
+          Confirm Transaction
+        </Button>
       </div>
     }
 
     {isBuyVisible &&
-      <div className="car-card-detail">
-        <Button onClick={() => setBuyVisible(!isBuyVisible)} variant="" className="car-card-detail-cancel-btn">X</Button>
+      <div className="car-card-purchase-detail">
+        <Button onClick={() => setBuyVisible(!isBuyVisible)} variant="" className="car-card-cancel-btn">X</Button>
+        <p className="car-card-purchase-title">Buy Now</p>
         <p>
-          Buy Now
+          This allows you to buy at initial price NOW!!!
+          <br /><br />
+          Initial price: <b>{initialPrice} ALGO</b>
+          <br /><br />
+          Current Balance: <b>{balance} ALGO</b>
         </p>
+        <Alert variant="warning" className="p-2 border-none">
+          Please press <b>“Confirm Transaction”</b> to continue with payment.
+        </Alert>
+        <Button onClick={() => setBuyVisible(!isBuyVisible)} variant="" className="car-card-confirm-trans-btn">
+          Confirm Transaction
+        </Button>
       </div>
     }
 
