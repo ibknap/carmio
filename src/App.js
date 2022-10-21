@@ -16,14 +16,12 @@ function App() {
   const login = () => console.log("Login Click");
 
   return (
-    // <CarContainer carSection={carSection} />
-
-    // <div className="App">
-    //   <CusNavbar logo={logo} login={login} />
-    //   <Header headerImg={headerImg} goToCarContainer={goToCarContainer} />
-    //   <CarContainer carSection={carSection} />
-    // </div>
-    <Footer />
+    <div className="App">
+      <CusNavbar logo={logo} login={login} />
+      <Header headerImg={headerImg} goToCarContainer={goToCarContainer} />
+      <CarContainer carSection={carSection} />
+      <Footer />
+    </div>
   );
 }
 
