@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import CarCard from './CarCard/CarCard';
 
 const CarContainer = ({ carSection }) => (
-    <Container ref={carSection} style={{ paddingTop: "70px", height: "100rem" }}>
+    <Container ref={carSection} className="mt-5">
         <Row>
             <Col sm={3} className="mt-5">
                 <CarCard
