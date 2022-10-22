@@ -3,12 +3,21 @@ import PropTypes from 'prop-types';
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import './Navbar.css';
 
-function CusNavbar({ logo, balance }) {
-    const [isAccountInfo, setAccountInfo] = useState(false);
+function CusNavbar({ logo, balance, address, avatar }) {
+    const [isAuth, setAuth] = useState(false);
 
-    const loginInfo = <div className="cus-navbar-btn border-none border-1 cus-primary" variant="">
-        <b>{balance} ALGO</b>
+    const loginInfo = <div className="cus-navbar-btn-avatar border-none border-1 cus-primary" variant="">
+        <div style={{width: "40px", background: "#000"}}>
+            <img src={avatar} alt="avatar" className="avatar" />
+        </div>
+        <div style={{marginLeft: "10px"}}>
+            <b>{balance} ALGO</b>
+            <br />
+            addr: {address}
+        </div>
     </div>
+
+    const loginBtn = <Button onClick={() => setAuth(!isAuth)} className="cus-navbar-btn border-none border-1 cus-primary" variant="">Login</Button>
 
     return (
         <Navbar bg="" expand="lg" fixed="top" className="cus-navbar">
@@ -23,9 +32,7 @@ function CusNavbar({ logo, balance }) {
                         navbarScroll
                     >
                     </Nav>
-                    {isAccountInfo
-                        ? loginInfo
-                        : <Button onClick={() => setAccountInfo(!isAccountInfo)} className="cus-navbar-btn border-none border-1 cus-primary" variant="">Login</Button>}
+                    {isAuth ? loginInfo : loginBtn}
                 </Navbar.Collapse>
             </Container>
         </Navbar>
@@ -34,7 +41,9 @@ function CusNavbar({ logo, balance }) {
 
 CusNavbar.propTypes = {
     logo: PropTypes.string,
-    balance: PropTypes.func,
+    balance: PropTypes.number,
+    address: PropTypes.string,
+    avatar: PropTypes.string,
 };
 
 export default CusNavbar;

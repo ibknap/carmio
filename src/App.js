@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="App">
-      <CusNavbar logo={logo} balance={100.02} />
+      <CusNavbar logo={logo} balance={100.02} address="8932***9021" avatar="https://library.kissclipart.com/20191116/wze/kissclipart-avatar-icon-awesome-set-icon-forum-user-icon-18f64889026582d3.png"/>
       <Header headerImg={headerImg} goToCarContainer={goToCarContainer} />
       <CarContainer carSection={carSection} />
       <Footer />
