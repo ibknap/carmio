@@ -4,13 +4,14 @@ import { Card, Button, Alert, Form } from "react-bootstrap";
 import './CarCard.css';
 
 function CarCard({ image, name, brand, initialPrice, currentBidding, details, balance }) {
-  const [isDetailVisible, setDetailVisible] = useState(false)
-  const [isBidVisible, setBidVisible] = useState(false)
-  const [isBuyVisible, setBuyVisible] = useState(false)
+  const [isDetail, setDetail] = useState(false)
+  const [isBid, setBid] = useState(false)
+  const [isBuy, setBuy] = useState(false)
 
   return (<Card className="car-card">
     <Card.Img variant="top" className="car-card-image" src={image} />
 
+    {/* car basic information */}
     <Card.Body className="car-card-info">
       <Card.Title>{name}</Card.Title>
       <Card.Subtitle className="car-card-subtitle">{brand}</Card.Subtitle>
@@ -22,22 +23,27 @@ function CarCard({ image, name, brand, initialPrice, currentBidding, details, ba
     </Card.Body>
 
     <div className="car-card-purchase-container">
-      <Button onClick={() => setBidVisible(!isDetailVisible)} variant="" className="car-card-purchase-btn">Bid Price</Button>
-      <Button onClick={() => setBuyVisible(!isDetailVisible)} variant="" className="car-card-purchase-btn">Buy Now</Button>
+      {/* car bid information */}
+      <Button onClick={() => setBid(!isBid)} variant="" className="car-card-purchase-btn">Bid Price</Button>
+      {/* car buy information */}
+      <Button onClick={() => setBuy(!isBuy)} variant="" className="car-card-purchase-btn">Buy Now</Button>
     </div>
 
-    <Button onClick={() => setDetailVisible(!isDetailVisible)} variant="" className="car-card-detail-btn">Details</Button>
+    {/* car detail card information */}
+    <Button onClick={() => setDetail(!isDetail)} variant="" className="car-card-detail-btn">Details</Button>
 
-    {isDetailVisible &&
+    {/* card information close btn */}
+    {isDetail &&
       <div className="car-card-detail">
-        <Button onClick={() => setDetailVisible(!isDetailVisible)} variant="" className="car-card-cancel-btn">X</Button>
+        <Button onClick={() => setDetail(!isDetail)} variant="" className="car-card-cancel-btn">X</Button>
         <p>{details}</p>
       </div>
     }
 
-    {isBidVisible &&
+    {/* car bid card */}
+    {isBid &&
       <div className="car-card-purchase-detail">
-        <Button onClick={() => setBidVisible(!isBidVisible)} variant="" className="car-card-cancel-btn">X</Button>
+        <Button onClick={() => setBid(!isBid)} variant="" className="car-card-cancel-btn">X</Button>
         <p className="car-card-purchase-title">Bid Now</p>
         <p>
           This allows you to bid around initial price
@@ -49,15 +55,16 @@ function CarCard({ image, name, brand, initialPrice, currentBidding, details, ba
         <hr />
         <Form.Control className="formInput" variant="dark" type="number" id="biddingPrice" placeholder="Bidding price in ALGO" />
         <br />
-        <Button onClick={() => setBidVisible(!isBidVisible)} variant="" className="car-card-confirm-trans-btn">
+        <Button onClick={() => setBid(!isBid)} variant="" className="car-card-confirm-trans-btn">
           Confirm Transaction
         </Button>
       </div>
     }
 
-    {isBuyVisible &&
+    {/* car buy card */}
+    {isBuy &&
       <div className="car-card-purchase-detail">
-        <Button onClick={() => setBuyVisible(!isBuyVisible)} variant="" className="car-card-cancel-btn">X</Button>
+        <Button onClick={() => setBuy(!isBuy)} variant="" className="car-card-cancel-btn">X</Button>
         <p className="car-card-purchase-title">Buy Now</p>
         <p>
           This allows you to buy at initial price NOW!!!
@@ -69,7 +76,7 @@ function CarCard({ image, name, brand, initialPrice, currentBidding, details, ba
         <Alert variant="warning" className="p-2 border-none">
           Please press <b>“Confirm Transaction”</b> to continue with payment.
         </Alert>
-        <Button onClick={() => setBuyVisible(!isBuyVisible)} variant="" className="car-card-confirm-trans-btn">
+        <Button onClick={() => setBuy(!isBuy)} variant="" className="car-card-confirm-trans-btn">
           Confirm Transaction
         </Button>
       </div>

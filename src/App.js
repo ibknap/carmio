@@ -13,11 +13,9 @@ function App() {
 
   const goToCarContainer = () => carSection.current?.scrollIntoView({ behavior: 'smooth' });
 
-  const login = () => console.log("Login Click");
-
   return (
     <div className="App">
-      <CusNavbar logo={logo} login={login} />
+      <CusNavbar logo={logo} balance={100.02} />
       <Header headerImg={headerImg} goToCarContainer={goToCarContainer} />
       <CarContainer carSection={carSection} />
       <Footer />
