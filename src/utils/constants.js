@@ -18,7 +18,7 @@ export const myAlgoConnect = new MyAlgoConnect();
 
 export const minRound = 21540981;
 
-export const marketplaceNote = "carmio-app:uv1"
+export const carmioNote = "carmio-app:uv1"
 
 // Maximum local storage allocation, immutable
 export const numLocalInts = 0;
