@@ -4,7 +4,9 @@ import { microAlgosToString, truncateAddress } from '../../utils/conversions';
 import { Button, Container, Nav, Navbar, OverlayTrigger, Tooltip, Alert } from "react-bootstrap";
 import './Navbar.css';
 
-function CusNavbar({ logo, balance, address, avatar, login, logout }) {
+function CusNavbar({ logo, balance, address, avatar, login, logout, createCar }) {
+    const admin = "ZORSQQE5UXXUAH3VG5AZIO5E55JSVICUE2MWHOWWA2BJCULGFXD6MXYDKE";
+    
     const accountInfo = <a href={`https://testnet.algoexplorer.io/address/${address}`} target="_blank" rel="noreferrer" className="text-decoration-none cus-navbar-btn-avatar border-none border-1 cus-primary" variant="">
         <div style={{ width: "40px", background: "#000" }}>
             <img src={avatar} alt="avatar" className="avatar" />
@@ -20,7 +22,7 @@ function CusNavbar({ logo, balance, address, avatar, login, logout }) {
 
     const logoutBtn = <Nav.Link onClick={() => logout()} className="text-white">Logout</Nav.Link>
 
-    const createBtn = <OverlayTrigger
+    const createBtn = !admin ?<OverlayTrigger
         key="createBtn"
         placement="bottom"
         overlay={
@@ -32,7 +34,7 @@ function CusNavbar({ logo, balance, address, avatar, login, logout }) {
         }
     >
         <Nav.Link href="#" className="text-muted">Create</Nav.Link>
-    </OverlayTrigger>
+    </OverlayTrigger> : <Nav.Link onClick={() => createCar()} className="text-white">Create</Nav.Link>;
 
     return (
         <Navbar bg="" expand="lg" fixed="top" className="cus-navbar">
@@ -60,6 +62,7 @@ CusNavbar.propTypes = {
     avatar: PropTypes.string,
     login: PropTypes.func,
     logout: PropTypes.func,
+    createCar: PropTypes.func,
 };
 
 export default CusNavbar;
