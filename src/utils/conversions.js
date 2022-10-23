@@ -28,3 +28,4 @@ export const stringToMicroAlgos = (str) => {
     let bigNumber = new BigNumber(str)
     return bigNumber.shiftedBy(ALGORAND_DECIMALS).toNumber();
 }
+
