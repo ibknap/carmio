@@ -2,8 +2,9 @@ import React, { useState } from "react"
 import PropTypes from 'prop-types';
 import { Card, Button, Alert, Form } from "react-bootstrap";
 import './CarCard.css';
+import { propTypes } from "react-bootstrap/esm/Image";
 
-function CarCard({ image, name, brand, initialPrice, currentBidding, details, balance }) {
+function CarCard({ image, name, brand, initialPrice, currentBidding, details, balance, sold, appId, owner }) {
   const [isDetail, setDetail] = useState(false)
   const [isBid, setBid] = useState(false)
   const [isBuy, setBuy] = useState(false)
@@ -92,6 +93,9 @@ CarCard.propTypes = {
   initialPrice: PropTypes.number,
   currentBidding: PropTypes.number,
   details: PropTypes.string,
+  sold: propTypes.number,
+  appId: propTypes.number,
+  owner: PropTypes.string,
 };
 
 export default CarCard;

@@ -13,7 +13,8 @@ import {
 /* eslint import/no-webpack-loader-syntax: off */
 import approvalProgram from "!!raw-loader!../contracts/carmio_approval.teal";
 import clearProgram from "!!raw-loader!../contracts/carmio_clear.teal";
-import {base64ToUTF8String, utf8ToBase64String} from "./conversions";
+import {base64ToUTF8String, utf8ToBase64String, stringToMicroAlgos} from "./conversions";
+
 
 class Carmio {
     constructor(image, name, brand, initialPrice, currentBidding, description, sold, appId, owner) {
