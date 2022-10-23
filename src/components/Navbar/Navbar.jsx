@@ -1,25 +1,24 @@
-import React, { useState } from "react"
+import React from "react";
 import PropTypes from 'prop-types';
+import { microAlgosToString, truncateAddress } from '../../utils/conversions';
 import { Button, Container, Nav, Navbar, OverlayTrigger, Tooltip, Alert } from "react-bootstrap";
 import './Navbar.css';
 
-function CusNavbar({ logo, balance, address, avatar }) {
-    const [isAuth, setAuth] = useState(false);
-
-    const loginInfo = <div className="cus-navbar-btn-avatar border-none border-1 cus-primary" variant="">
+function CusNavbar({ logo, balance, address, avatar, login, logout }) {
+    const accountInfo = <a href={`https://testnet.algoexplorer.io/address/${address}`} target="_blank" rel="noreferrer" className="text-decoration-none cus-navbar-btn-avatar border-none border-1 cus-primary" variant="">
         <div style={{ width: "40px", background: "#000" }}>
             <img src={avatar} alt="avatar" className="avatar" />
         </div>
         <div style={{ marginLeft: "10px" }}>
-            <b>{balance} ALGO</b>
+            <b>{microAlgosToString(balance)} ALGO</b>
             <br />
-            addr: {address}
+            addr: {truncateAddress(address)}
         </div>
-    </div>
+    </a>
 
-    const loginBtn = <Button onClick={() => setAuth(!isAuth)} className="cus-navbar-btn border-none border-1 cus-primary" variant="">Login</Button>
+    const loginBtn = <Button onClick={() => login()} className="cus-navbar-btn border-none border-1 cus-primary" variant="">Login</Button>
 
-    const logoutBtn = <Nav.Link href="#" onClick={() => setAuth(false)} className="text-white">Logout</Nav.Link>
+    const logoutBtn = <Nav.Link onClick={() => logout()} className="text-white">Logout</Nav.Link>
 
     const createBtn = <OverlayTrigger
         key="createBtn"
@@ -44,10 +43,10 @@ function CusNavbar({ logo, balance, address, avatar }) {
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-                        {isAuth && createBtn}
-                        {isAuth && logoutBtn}
+                        {address && createBtn}
+                        {address && logoutBtn}
                     </Nav>
-                    {isAuth ? loginInfo : loginBtn}
+                    {address ? accountInfo : loginBtn}
                 </Navbar.Collapse>
             </Container>
         </Navbar>
@@ -59,6 +58,8 @@ CusNavbar.propTypes = {
     balance: PropTypes.number,
     address: PropTypes.string,
     avatar: PropTypes.string,
+    login: PropTypes.func,
+    logout: PropTypes.func,
 };
 
 export default CusNavbar;

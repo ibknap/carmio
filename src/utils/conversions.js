@@ -12,7 +12,8 @@ export const utf8ToBase64String = (utf8String) => {
 // Truncate is done in the middle to allow for checking of first and last chars simply to ensure correct address
 export const truncateAddress = (address) => {
     if (!address) return
-    return address.slice(0, 5) + "..." + address.slice(address.length - 5, address.length);
+    let newAddr = address.slice(0, 4) + "..." + address.slice(address.length - 4, address.length);
+    return newAddr.toLowerCase();
 }
 
 // Amounts in microAlgos (e.g. 10500) are shown as algos (e.g. 10.5) in the frontend
