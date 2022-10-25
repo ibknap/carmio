@@ -129,7 +129,7 @@ const CreateCar = ({ createNewCar }) => {
                                 currentBidding,
                                 description,
                             });
-                            // handleCloseModal();
+                            handleCloseModal();
                         }}
                         disabled={!isFormFilled()}
                         className="cus-btn border-none text-white"

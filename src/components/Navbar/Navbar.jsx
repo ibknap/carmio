@@ -4,23 +4,15 @@ import CreateCar from "../../components/Car/CreateCar/CreateCar";
 import { microAlgosToString, truncateAddress } from '../../utils/conversions';
 import { Button, Container, Nav, Navbar, OverlayTrigger, Tooltip, Alert } from "react-bootstrap";
 import { NotificationError, NotificationSuccess } from "../../components/Notifications";
-import { buyCarAction, createCarAction, deleteCarAction, getCarsAction } from "../../utils/carmio";
+import { createCarAction } from "../../utils/carmio";
 import {toast} from "react-toastify";
 import './Navbar.css';
 
 function CusNavbar({ logo, balance, address, avatar, login, logout, createCar }) {
     const createCarFunc = async (data) => {
         createCarAction(address, data)
-            .then((data) => {
-                console.log(data);
-                toast(<NotificationSuccess text="Car added successfully." />);
-                // getCars();
-                // fetchBalance(address);
-            })
-            .catch(error => {
-                console.log(error);
-                toast(<NotificationError text="Failed to create a car." />);
-            })
+            .then(() => toast(<NotificationSuccess text="Car added successfully." />))
+            .catch(error => toast(<NotificationError text={`Failed to create a car. \n ERROR: ${error}`} />))
     };
     
     const admin = "ZORSQQE5UXXUAH3VG5AZIO5E55JSVICUE2MWHOWWA2BJCULGFXD6MXYDKE";

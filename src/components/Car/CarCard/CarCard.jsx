@@ -93,8 +93,8 @@ CarCard.propTypes = {
   initialPrice: PropTypes.number,
   currentBidding: PropTypes.number,
   details: PropTypes.string,
-  sold: propTypes.number,
-  appId: propTypes.number,
+  sold: PropTypes.number,
+  appId: PropTypes.number,
   owner: PropTypes.string,
 };
 
