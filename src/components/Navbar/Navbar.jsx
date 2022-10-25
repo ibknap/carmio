@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import CreateCar from "../../components/Car/CreateCar";
+import CreateCar from "../../components/Car/CreatCar/CreateCar";
 import { microAlgosToString, truncateAddress } from '../../utils/conversions';
 import { Button, Container, Nav, Navbar, OverlayTrigger, Tooltip, Alert } from "react-bootstrap";
 import './Navbar.css';

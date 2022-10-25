@@ -1,0 +1,21 @@
+.formInput, .formInput:focus {
+    background: #eee !important;
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+    height: 50px !important;
+    box-shadow: none !important;
+}
+
+.formTextarea, .formTextarea:focus {
+    background: #eee !important;
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.cus-btn {
+    width: 120px !important;
+    height: 40px !important;
+    background-color: #000 !important;
+    position: relative !important;
+}
