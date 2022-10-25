@@ -7,8 +7,7 @@ import CarContainer from "./components/Car/CarContainer";
 import Footer from './components/Footer/Footer';
 import './App.css';
 import { indexerClient, myAlgoConnect } from "./utils/constants";
-import { NotificationError, NotificationSuccess } from "./components/Notifications";
-import { createCarAction } from "./utils/carmio";
+import { NotificationError } from "./components/Notifications";
 import {toast} from "react-toastify";
 
 function App() {
@@ -25,7 +24,7 @@ function App() {
         setBalance(_balance);
       })
       .catch((error) => {
-        console.log(error);
+        toast(<NotificationError text={`ERROR: ${error}`} />);
       });
   };
 
@@ -36,7 +35,7 @@ function App() {
         setAddress(_account.address);
         fetchBalance(_account.address);
       }).catch(error => {
-        console.log('Could not connect to MyAlgo wallet');
+        toast(<NotificationError text="Could not connect to MyAlgo wallet" />);
         console.error(error);
       })
   };
@@ -46,24 +45,9 @@ function App() {
     setBalance(null);
   };
 
-  const createCar = async (data) => {
-    // setLoading(true);
-    createCarAction(address, data)
-      .then(() => {
-        toast(<NotificationSuccess text="Car added successfully." />);
-        // getCars();
-        // fetchBalance(address);
-      })
-      .catch(error => {
-        // console.log(error);
-        toast(<NotificationError text="Failed to create a car." />);
-        // setLoading(false);
-      })
-  };
-
   return (
     <div className="App">
-      <CusNavbar login={connectWallet} logout={disconnectWallet} createCar={createCar} logo={logo} balance={balance} address={address} avatar={avatar} />
+      <CusNavbar login={connectWallet} logout={disconnectWallet} logo={logo} balance={balance} address={address} avatar={avatar} />
       <Header headerImg={headerImg} goToCarContainer={goToCarContainer} />
       {address && <CarContainer carSection={carSection} address={address} fetchBalance={fetchBalance} />}
       <Footer />

@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import PropTypes from 'prop-types';
 import { Card, Button, Alert, Form } from "react-bootstrap";
 import './CarCard.css';
-import { propTypes } from "react-bootstrap/esm/Image";
 
 function CarCard({ image, name, brand, initialPrice, currentBidding, details, balance, sold, appId, owner }) {
   const [isDetail, setDetail] = useState(false)

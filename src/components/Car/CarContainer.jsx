@@ -4,6 +4,8 @@ import { Container, Row, Col, Alert } from "react-bootstrap";
 import CarCard from './CarCard/CarCard';
 import Loader from "../Loader";
 import { buyCarAction, deleteCarAction, getCarsAction } from "../../utils/carmio";
+import { NotificationError } from "../../components/Notifications";
+import {toast} from "react-toastify";
 
 const CarContainer = ({ carSection, address, fetchBalance }) => {
     const [cars, setCars] = useState([]);
@@ -19,6 +21,8 @@ const CarContainer = ({ carSection, address, fetchBalance }) => {
             })
             .catch(error => {
                 console.log(error);
+                toast(<NotificationError text="Could not get cars details" />);
+
             })
             .finally(_ => {
                 setLoading(false);

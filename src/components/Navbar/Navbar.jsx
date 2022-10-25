@@ -8,7 +8,7 @@ import { createCarAction } from "../../utils/carmio";
 import {toast} from "react-toastify";
 import './Navbar.css';
 
-function CusNavbar({ logo, balance, address, avatar, login, logout, createCar }) {
+function CusNavbar({ logo, balance, address, avatar, login, logout }) {
     const createCarFunc = async (data) => {
         createCarAction(address, data)
             .then(() => toast(<NotificationSuccess text="Car added successfully." />))
@@ -78,7 +78,6 @@ CusNavbar.propTypes = {
     avatar: PropTypes.string,
     login: PropTypes.func,
     logout: PropTypes.func,
-    createCar: PropTypes.func,
 };
 
 export default CusNavbar;
