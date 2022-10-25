@@ -30,7 +30,7 @@ const CreateCar = ({ createNewCar }) => {
                 Create
                 <i className="bi bi-plus"></i>
             </Button>
-            <Modal show={showModal} onHide={handleCloseModal} centered scrollable>
+            <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Create New Car Post</Modal.Title>
                 </Modal.Header>
@@ -112,7 +112,7 @@ const CreateCar = ({ createNewCar }) => {
                                 className="formTextarea"
                                 placeholder="Enter car description"
                                 style={{ height: "100px" }}
-                                maxLength={200}
+                                maxLength={100}
                                 onChange={(e) => setDescription(e.target.value)}
                             />
                         </FloatingLabel>
@@ -122,12 +122,14 @@ const CreateCar = ({ createNewCar }) => {
                     <Button
                         onClick={() => {
                             createNewCar({
-                                name,
                                 image,
+                                name,
+                                brand,
+                                initialPrice,
+                                currentBidding,
                                 description,
-                                initialPrice
                             });
-                            handleCloseModal();
+                            // handleCloseModal();
                         }}
                         disabled={!isFormFilled()}
                         className="cus-btn border-none text-white"
