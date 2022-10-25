@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import CarCard from './CarCard/CarCard';
 import Loader from "../Loader";
 import { buyCarAction, createCarAction, deleteCarAction, getCarsAction } from "../../utils/carmio";
@@ -30,7 +30,17 @@ const CarContainer = ({ carSection, address, fetchBalance }) => {
     }, []);
 
     if (loading) {
-        return <Loader />;
+        return <Container className="m-5">
+            <Row className="justify-content-center">
+                <Col sm={3} className="text-center">
+                    <Loader />
+                    <br />
+                    <Alert variant="info" className="p-2 border-none">
+                        Loading Car details!!!
+                    </Alert>
+                </Col>
+            </Row>
+        </Container>;
     }
 
     return (
