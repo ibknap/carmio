@@ -15,7 +15,7 @@ function CusNavbar({ logo, balance, address, avatar, login, logout }) {
             .catch(error => toast(<NotificationError text={`Failed to create a car. \n ERROR: ${error}`} />))
     };
     
-    const admin = "ZORSQQE5UXXUAH3VG5AZIO5E55JSVICUE2MWHOWWA2BJCULGFXD6MXYDKE";
+    const isAdmin = "ZORSQQE5UXXUAH3VG5AZIO5E55JSVICUE2MWHOWWA2BJCULGFXD6MXYDKE" == address;
 
     const accountInfo = <a href={`https://testnet.algoexplorer.io/address/${address}`} target="_blank" rel="noreferrer" className="text-decoration-none cus-navbar-btn-avatar border-none border-1 cus-primary" variant="">
         <div style={{ width: "40px", background: "#000" }}>
@@ -32,7 +32,7 @@ function CusNavbar({ logo, balance, address, avatar, login, logout }) {
 
     const logoutBtn = <Nav.Link onClick={() => logout()} className="text-white">Logout</Nav.Link>
 
-    const createBtn = !admin ? <OverlayTrigger
+    const createBtn = !isAdmin ? <OverlayTrigger
         key="createBtn"
         placement="bottom"
         overlay={
