@@ -49,7 +49,7 @@ function App() {
     <div className="App">
       <CusNavbar login={connectWallet} logout={disconnectWallet} logo={logo} balance={balance} address={address} avatar={avatar} />
       <Header headerImg={headerImg} goToCarContainer={goToCarContainer} />
-      {address && <CarContainer carSection={carSection} address={address} fetchBalance={fetchBalance} />}
+      {address && <CarContainer carSection={carSection} balance={balance}/>}
       <Footer />
     </div>
   );

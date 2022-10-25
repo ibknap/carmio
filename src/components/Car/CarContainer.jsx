@@ -7,7 +7,7 @@ import { buyCarAction, deleteCarAction, getCarsAction } from "../../utils/carmio
 import { NotificationError } from "../../components/Notifications";
 import {toast} from "react-toastify";
 
-const CarContainer = ({ carSection, address, fetchBalance }) => {
+const CarContainer = ({ carSection, balance }) => {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -59,7 +59,7 @@ const CarContainer = ({ carSection, address, fetchBalance }) => {
                             initialPrice={car.initialPrice}
                             currentBidding={car.currentBidding}
                             details={car.description}
-                            balance={fetchBalance}
+                            balance={balance}
                             sold={car.sold}
                             appId={car.appId}
                             owner={car.owner} />
@@ -72,6 +72,7 @@ const CarContainer = ({ carSection, address, fetchBalance }) => {
 
 CarContainer.propTypes = {
     goToCarSection: PropTypes.func,
+    balance: PropTypes.number,
 };
 
 export default CarContainer;

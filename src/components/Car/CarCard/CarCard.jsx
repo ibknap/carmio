@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import PropTypes from 'prop-types';
 import { Card, Button, Alert, Form } from "react-bootstrap";
+import { microAlgosToString } from '../../../utils/conversions';
 import './CarCard.css';
 
 function CarCard({ image, name, brand, initialPrice, currentBidding, details, balance, sold, appId, owner }) {
@@ -16,9 +17,9 @@ function CarCard({ image, name, brand, initialPrice, currentBidding, details, ba
       <Card.Title>{name}</Card.Title>
       <Card.Subtitle className="car-card-subtitle">{brand}</Card.Subtitle>
       <Card.Text className="car-card-sub-others">
-        Initial price: <b>{initialPrice} ALGO</b>
+        Initial price: <b>{microAlgosToString(initialPrice)} ALGO</b>
         <br />
-        Current bidding: <b>{currentBidding} ALGO</b>
+        Current bidding: <b>{microAlgosToString(currentBidding)} ALGO</b>
       </Card.Text>
     </Card.Body>
 
@@ -48,9 +49,9 @@ function CarCard({ image, name, brand, initialPrice, currentBidding, details, ba
         <p>
           This allows you to bid around initial price
           <hr />
-          Current bidding: <b>{currentBidding} ALGO</b>
+          Current bidding: <b>{microAlgosToString(currentBidding)} ALGO</b>
           <br /><br />
-          Current Balance: <b>{balance} ALGO</b>
+          Current Balance: <b>{microAlgosToString(balance)} ALGO</b>
         </p>
         <hr />
         <Form.Control className="formInput" variant="dark" type="number" id="biddingPrice" placeholder="Bidding price in ALGO" />
@@ -69,9 +70,9 @@ function CarCard({ image, name, brand, initialPrice, currentBidding, details, ba
         <p>
           This allows you to buy at initial price NOW!!!
           <br /><br />
-          Initial price: <b>{initialPrice} ALGO</b>
+          Initial price: <b>{microAlgosToString(initialPrice)} ALGO</b>
           <br /><br />
-          Current Balance: <b>{balance} ALGO</b>
+          Current Balance: <b>{microAlgosToString(balance)} ALGO</b>
         </p>
         <Alert variant="warning" className="p-2 border-none">
           Please press <b>“Confirm Transaction”</b> to continue with payment.
