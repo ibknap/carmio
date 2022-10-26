@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import CarCard from './CarCard/CarCard';
 import Loader from "../Loader";
-import { buyCarAction, deleteCarAction, getCarsAction } from "../../utils/carmio";
-import { NotificationError } from "../../components/Notifications";
-import {toast} from "react-toastify";
+import { buyCarAction, bidCarAction, deleteCarAction, getCarsAction } from "../../utils/carmio";
+import { NotificationSuccess, NotificationError } from "../../components/Notifications";
+import { toast } from "react-toastify";
 
-const CarContainer = ({ carSection, balance }) => {
+const CarContainer = ({ carSection, address, balance }) => {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -27,6 +27,34 @@ const CarContainer = ({ carSection, balance }) => {
             .finally(_ => {
                 setLoading(false);
             });
+    };
+
+    const buyCar = async (car) => {
+        setLoading(true);
+        buyCarAction(address, car)
+            .then(() => {
+                toast(<NotificationSuccess text="Car bought successfully" />);
+                getCars();
+            })
+            .catch(error => {
+                console.log(error)
+                toast(<NotificationError text="Failed to purchase car." />);
+                setLoading(false);
+            })
+    };
+
+    const bidCar = async (car, biddingPrice) => {
+        setLoading(true);
+        bidCarAction(address, car, biddingPrice)
+            .then(() => {
+                toast(<NotificationSuccess text="Car bid successfully" />);
+                getCars();
+            })
+            .catch(error => {
+                console.log(error)
+                toast(<NotificationError text="Failed to bid car." />);
+                setLoading(false);
+            })
     };
 
     useEffect(() => {
@@ -52,17 +80,7 @@ const CarContainer = ({ carSection, balance }) => {
             <Row>
                 {cars.map((car, index) => (
                     <Col key={index} sm={3} className="mt-5">
-                        <CarCard
-                            image={car.image}
-                            name={car.name}
-                            brand={car.brand}
-                            initialPrice={car.initialPrice}
-                            currentBidding={car.currentBidding}
-                            details={car.description}
-                            balance={balance}
-                            sold={car.sold}
-                            appId={car.appId}
-                            owner={car.owner} />
+                        <CarCard car={car} balance={balance} buyCar={buyCar} bidCar={bidCar}/>
                     </Col>
                 ))}
             </Row>
@@ -72,6 +90,7 @@ const CarContainer = ({ carSection, balance }) => {
 
 CarContainer.propTypes = {
     goToCarSection: PropTypes.func,
+    address: PropTypes.string,
     balance: PropTypes.number,
 };
 

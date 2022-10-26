@@ -130,9 +130,9 @@ export const buyCarAction = async (senderAddress, car) => {
 
 
 // BID CAR PRICING:
-export const bidCarAction = async (senderAddress, car, bidPrice) => {
+export const bidCarAction = async (senderAddress, car, biddingPrice) => {
     let params = await algodClient.getTransactionParams().do();
-    bidPrice = stringToMicroAlgos(bidPrice)
+    biddingPrice = stringToMicroAlgos(biddingPrice)
 
     // Build required app args as Uint8Array
     let bidArg = new TextEncoder().encode("bid")
@@ -151,7 +151,7 @@ export const bidCarAction = async (senderAddress, car, bidPrice) => {
     let paymentTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
         from: senderAddress,
         to: car.owner,
-        amount: bidPrice,
+        amount: biddingPrice,
         suggestedParams: params
     })
 
