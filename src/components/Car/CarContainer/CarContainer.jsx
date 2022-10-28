@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Alert } from "react-bootstrap";
-import CarCard from './CarCard/CarCard';
-import Loader from "../Loader";
-import { buyCarAction, bidCarAction, deleteCarAction, getCarsAction } from "../../utils/carmio";
-import { NotificationSuccess, NotificationError } from "../../components/Notifications";
+import CarCard from '../CarCard/CarCard';
+import Loader from "../../Loader";
+import { buyCarAction, bidCarAction, deleteCarAction, getCarsAction } from "../../../utils/carmio";
+import { NotificationSuccess, NotificationError } from "../../Notifications";
 import { toast } from "react-toastify";
 
 const CarContainer = ({ carSection, address, balance }) => {
