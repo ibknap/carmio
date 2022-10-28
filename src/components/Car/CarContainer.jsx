@@ -32,7 +32,8 @@ const CarContainer = ({ carSection, address, balance }) => {
     const buyCar = async (car) => {
         setLoading(true);
         buyCarAction(address, car)
-            .then(() => {
+            .then((success) => {
+                console.log(success)
                 toast(<NotificationSuccess text="Car bought successfully" />);
                 getCars();
             })

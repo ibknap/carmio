@@ -33,6 +33,8 @@ function CarCard({ car, balance, buyCar, bidCar }) {
           Initial price: <b>{microAlgosToString(initialPrice)} ALGO</b>
           <br />
           Current bidding: <b>{microAlgosToString(currentBidding)} ALGO</b>
+          <br />
+          {microAlgosToString(sold)}
         </Card.Text>
       </Card.Body>
 
