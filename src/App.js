@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import Header from "./components/Header/Header";
-import headerImg from "./assets/img/header_img.png";
+import headerImg from "./assets/header_img.png";
 import CusNavbar from "./components/Navbar/Navbar";
-import logo from "./assets/img/logo.png";
+import logo from "./assets/logo.png";
 import CarContainer from "./components/Car/CarContainer";
 import Footer from './components/Footer/Footer';
 import './App.css';
