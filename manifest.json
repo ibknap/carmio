@@ -1,0 +1,15 @@
+{
+  "short_name": "Carmio",
+  "name": "An Algorand dApp car bidding application",
+  "icons": [
+    {
+      "src": "logo-sm.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#111619",
+  "background_color": "#ffffff"
+}

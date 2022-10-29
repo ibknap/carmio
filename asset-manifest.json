@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/carmio/static/css/main.bae34987.chunk.css",
+    "main.js": "/carmio/static/js/main.46bdc75e.chunk.js",
+    "main.js.map": "/carmio/static/js/main.46bdc75e.chunk.js.map",
+    "runtime-main.js": "/carmio/static/js/runtime-main.bba9aff5.js",
+    "runtime-main.js.map": "/carmio/static/js/runtime-main.bba9aff5.js.map",
+    "static/css/2.1d1f784d.chunk.css": "/carmio/static/css/2.1d1f784d.chunk.css",
+    "static/js/2.2d18c1f8.chunk.js": "/carmio/static/js/2.2d18c1f8.chunk.js",
+    "static/js/2.2d18c1f8.chunk.js.map": "/carmio/static/js/2.2d18c1f8.chunk.js.map",
+    "static/js/3.55088861.chunk.js": "/carmio/static/js/3.55088861.chunk.js",
+    "static/js/3.55088861.chunk.js.map": "/carmio/static/js/3.55088861.chunk.js.map",
+    "index.html": "/carmio/index.html",
+    "static/css/2.1d1f784d.chunk.css.map": "/carmio/static/css/2.1d1f784d.chunk.css.map",
+    "static/css/main.bae34987.chunk.css.map": "/carmio/static/css/main.bae34987.chunk.css.map",
+    "static/js/2.2d18c1f8.chunk.js.LICENSE.txt": "/carmio/static/js/2.2d18c1f8.chunk.js.LICENSE.txt",
+    "static/media/bootstrap-icons.css": "/carmio/static/media/bootstrap-icons.ea98e12d.woff2",
+    "static/media/header_img.bde0f678.png": "/carmio/static/media/header_img.bde0f678.png",
+    "static/media/logo.906f0776.png": "/carmio/static/media/logo.906f0776.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bba9aff5.js",
+    "static/css/2.1d1f784d.chunk.css",
+    "static/js/2.2d18c1f8.chunk.js",
+    "static/css/main.bae34987.chunk.css",
+    "static/js/main.46bdc75e.chunk.js"
+  ]
+}
