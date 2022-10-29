@@ -12,16 +12,16 @@ This is the demo [link](https://ibukunoluwanap.github.io/carmio/) to try out the
 
 ### Screen Shots
 #### home page
-![short 1](https://i.imgur.com/6duMlhS.jpeg "short 1")
+![short 1](https://raw.githubusercontent.com/ibukunoluwanap/carmio/main/src/assets/screenshots/shot1.png "short 1")
 
 #### car section
-![short 2](https://i.imgur.com/6duMlhS.jpeg "short 2")
+![short 2](https://raw.githubusercontent.com/ibukunoluwanap/carmio/main/src/assets/screenshots/shot2.png "short 2")
 
 #### bidding card
-![short 3](https://i.imgur.com/6duMlhS.jpeg "short 3")
+![short 3](https://raw.githubusercontent.com/ibukunoluwanap/carmio/main/src/assets/screenshots/shot3.png "short 3")
 
 #### buying card
-![short 4](https://i.imgur.com/6duMlhS.jpeg "short 4")
+![short 4](https://raw.githubusercontent.com/ibukunoluwanap/carmio/main/src/assets/screenshots/shot4.png "short 4")
 
 #### To Run locally
 1. Clone repo
