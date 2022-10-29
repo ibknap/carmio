@@ -61,7 +61,7 @@ const Cars = ({ carSection, address, balance, fetchBalance }) => {
     };
 
     if (loading) {
-        return <Container className="m-5">
+        return <Container className="my-5">
             <Row className="justify-content-center">
                 <Col sm={3} className="text-center">
                     <Loader />
@@ -75,7 +75,7 @@ const Cars = ({ carSection, address, balance, fetchBalance }) => {
     }
 
     return (
-        <Container ref={carSection} className="mt-5 mb-5">
+        <Container ref={carSection} className="my-5">
             <Row>
                 {cars.map((car, index) => (
                     <Col key={index} sm={3} className="mt-5">

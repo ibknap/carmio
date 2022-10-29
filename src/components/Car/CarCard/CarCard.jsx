@@ -14,7 +14,7 @@ function CarCard({ address, car, balance, fetchBalance, buyCar, bidCar }) {
 
   let isSold = parseInt(microAlgosToString(sold));
 
-  const isBidFormFilled = useCallback(() => biddingPrice > microAlgosToString(currentBidding), [biddingPrice, currentBidding]);
+  const isBidFormFilled = useCallback(() => biddingPrice > parseInt(microAlgosToString(currentBidding)), [biddingPrice, currentBidding]);
 
   function buyNowFunc() {
     buyCar(car);
@@ -41,19 +41,18 @@ function CarCard({ address, car, balance, fetchBalance, buyCar, bidCar }) {
           <br />
           Current bidding: <b>{microAlgosToString(currentBidding)} ALGO</b>
           <br />
-          {microAlgosToString(sold)}
         </Card.Text>
       </Card.Body>
 
       <div className="car-card-purchase-container">
         {/* car bid information */}
-        <Button onClick={isSold !== 0 ? () => setBid(!isBid) : () => false} variant="" disabled={isSold === 0 ? true : false} className="car-card-purchase-btn">Bid Price</Button>
+        <Button onClick={isSold === 1 ? () => false : () => setBid(!isBid)} variant="" disabled={isSold === 1 ? true : false} className="car-card-purchase-btn">Bid Price</Button>
         {/* car buy information */}
-        <Button onClick={isSold !== 0 ? () => setBuy(!isBuy) : () => false} variant="" disabled={isSold === 0 ? true : false} className="car-card-purchase-btn">Buy Now</Button>
+        <Button onClick={isSold === 1 ? () => false : () => setBuy(!isBuy)} variant="" disabled={isSold === 1 ? true : false} className="car-card-purchase-btn">Buy Now</Button>
       </div>
 
       {/* car sold btn */}
-      {isSold === 0 ? <div className="car-sold-btn">Sold</div> : ""}
+      {isSold === 1 ? <div className="car-sold-btn">Sold</div> : ""}
 
       {/* car detail card information */}
       <Button onClick={() => setDetail(!isDetail)} variant="" className="car-card-detail-btn">Details</Button>
