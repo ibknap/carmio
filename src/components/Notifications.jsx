@@ -1,5 +1,5 @@
 import React from "react";
-import {ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import PropTypes from "prop-types";
 
 const Notification = () => (
@@ -16,16 +16,16 @@ const Notification = () => (
     />
 );
 
-const NotificationSuccess = ({text}) => (
+const NotificationSuccess = ({ text }) => (
     <div>
-        <i className="bi bi-check-circle-fill text-success mx-2"/>
+        <i className="bi bi-check-circle-fill text-success mx-2" />
         <span className="text-secondary mx-1">{text}</span>
     </div>
 );
 
-const NotificationError = ({text}) => (
+const NotificationError = ({ text }) => (
     <div>
-        <i className="bi bi-x-circle-fill text-danger mx-2"/>
+        <i className="bi bi-x-circle-fill text-danger mx-2" />
         <span className="text-secondary mx-1">{text}</span>
     </div>
 );
@@ -44,4 +44,4 @@ NotificationSuccess.defaultProps = DefaultProps;
 NotificationError.propTypes = Props;
 NotificationError.defaultProps = DefaultProps;
 
-export {Notification, NotificationSuccess, NotificationError};
+export { Notification, NotificationSuccess, NotificationError };

@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { NotificationSuccess, NotificationError } from "../../Notifications";
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import CarCard from '../CarCard/CarCard';
 import Loader from "../../Loader";
 import { buyCarAction, getCarsAction, bidCarAction } from "../../../utils/carmio";
-import { NotificationSuccess, NotificationError } from "../../Notifications";
-import { toast } from "react-toastify";
 
 const Cars = ({ carSection, address, balance, fetchBalance }) => {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    // get cars data
     const getCars = async () => {
         setLoading(true);
         getCarsAction()
             .then(cars => {
                 if (cars) {
+                    toast(<NotificationSuccess text="Successfully loader cars." />);
                     setCars(cars);
                 }
             })
-            .catch(error => {
-                console.log(error);
+            .catch(() => {
+                toast(<NotificationError text="Failed to load cars." />);
             })
             .finally(_ => {
                 setLoading(false);
@@ -31,6 +33,7 @@ const Cars = ({ carSection, address, balance, fetchBalance }) => {
         getCars();
     }, []);
 
+    // buy car
     const buyCar = async (car) => {
         setLoading(true);
         buyCarAction(address, car)
@@ -45,6 +48,7 @@ const Cars = ({ carSection, address, balance, fetchBalance }) => {
             })
     };
 
+    // bid car
     const bidCar = async (car, biddingPrice) => {
         setLoading(true);
         bidCarAction(address, car, biddingPrice)
@@ -53,25 +57,25 @@ const Cars = ({ carSection, address, balance, fetchBalance }) => {
                 getCars();
                 fetchBalance(address);
             })
-            .catch(error => {
-                console.log(error)
+            .catch(() => {
                 toast(<NotificationError text="Failed to bid car." />);
                 setLoading(false);
             })
     };
 
     if (loading) {
-        return <Container className="my-5">
-            <Row className="justify-content-center">
-                <Col sm={3} className="text-center">
-                    <Loader />
-                    <br />
-                    <Alert variant="info" className="p-2 border-none">
-                        Loading Car details!!!
-                    </Alert>
-                </Col>
-            </Row>
-        </Container>;
+        return (
+            <Container className="my-5">
+                <Row className="justify-content-center">
+                    <Col sm={3} className="text-center">
+                        <Loader />
+                        <br />
+                        <Alert variant="info" className="p-2 border-none">
+                            Loading Car details!!!
+                        </Alert>
+                    </Col>
+                </Row>
+            </Container>);
     }
 
     return (

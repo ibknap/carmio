@@ -4,9 +4,8 @@ import headerImg from "./assets/header_img.png";
 import CusNavbar from "./components/Navbar/Navbar";
 import Cars from "./components/Car/Cars/Cars";
 import Footer from './components/Footer/Footer';
+import {Notification} from "./components/Notifications";
 import { indexerClient, myAlgoConnect } from "./utils/constants";
-import { NotificationError } from "./components/Notifications";
-import { toast } from "react-toastify";
 import logo from "./assets/logo.png";
 import './App.css';
 
@@ -27,7 +26,7 @@ function App() {
         setBalance(_balance);
       })
       .catch((error) => {
-        toast(<NotificationError text={`ERROR: ${error}`} />);
+        console.log(error);
       });
   };
 
@@ -39,7 +38,7 @@ function App() {
         setAddress(_account.address);
         fetchBalance(_account.address);
       }).catch(error => {
-        toast(<NotificationError text="Could not connect to MyAlgo wallet" />);
+        console.log('Could not connect to MyAlgo wallet');
         console.error(error);
       })
   };
@@ -51,12 +50,15 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <CusNavbar login={connectWallet} logout={disconnectWallet} logo={logo} balance={balance} address={address} avatar={avatar} />
-      <Header headerImg={headerImg} goToCars={goToCars} />
-      {address && <Cars carSection={carSection} address={address} balance={balance} fetchBalance={fetchBalance} />}
-      <Footer />
-    </div>
+    <>
+      <Notification />
+      <div className="App">
+        <CusNavbar login={connectWallet} logout={disconnectWallet} logo={logo} balance={balance} address={address} avatar={avatar} />
+        <Header headerImg={headerImg} goToCars={goToCars} />
+        {address && <Cars carSection={carSection} address={address} balance={balance} fetchBalance={fetchBalance} />}
+        <Footer />
+      </div>
+    </>
   );
 }
 
