@@ -172,10 +172,14 @@ export const bidCarAction = async (senderAddress, car, biddingPrice) => {
 
     // Sign & submit the group transaction
     let signedTxn = await myAlgoConnect.signTransaction(txnArray.map(txn => txn.toByte()));
+    console.log("Signed group transaction");
     let tx = await algodClient.sendRawTransaction(signedTxn.map(txn => txn.blob)).do();
 
     // Wait for group transaction to be confirmed
-    await algosdk.waitForConfirmation(algodClient, tx.txId, 4);
+    let confirmedTxn = await algosdk.waitForConfirmation(algodClient, tx.txId, 4);
+
+    // Notify about completion
+    console.log("Group transaction " + tx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
 }
 
 

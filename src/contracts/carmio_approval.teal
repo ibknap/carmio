@@ -18,8 +18,7 @@ bnz main_l5
 err
 main_l5:
 byte "CURRENT BIDDING"
-txna ApplicationArgs 4
-btoi
+gtxn 1 Amount
 app_global_put
 int 1
 return
@@ -27,7 +26,7 @@ main_l6:
 byte "SOLD"
 byte "SOLD"
 app_global_get
-int 1
+int 1000000
 +
 app_global_put
 int 1
@@ -43,7 +42,7 @@ int 6
 ==
 assert
 txn Note
-byte "carmio-contract:v1"
+byte "carmio-contract:v2"
 ==
 assert
 txna ApplicationArgs 3

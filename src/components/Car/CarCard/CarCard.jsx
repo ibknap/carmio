@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useCallback } from "react"
 import PropTypes from 'prop-types';
 import { Card, Button, Alert, Form } from "react-bootstrap";
 import { microAlgosToString, truncateCarName } from '../../../utils/conversions';
@@ -13,6 +13,8 @@ function CarCard({ address, car, balance, fetchBalance, buyCar, bidCar }) {
   const [isBuy, setBuy] = useState(false)
 
   let isSold = parseInt(microAlgosToString(sold));
+
+  const isBidFormFilled = useCallback(() => biddingPrice > microAlgosToString(currentBidding), [biddingPrice, currentBidding]);
 
   function buyNowFunc() {
     buyCar(car);
@@ -39,14 +41,15 @@ function CarCard({ address, car, balance, fetchBalance, buyCar, bidCar }) {
           <br />
           Current bidding: <b>{microAlgosToString(currentBidding)} ALGO</b>
           <br />
+          {microAlgosToString(sold)}
         </Card.Text>
       </Card.Body>
 
       <div className="car-card-purchase-container">
         {/* car bid information */}
-        <Button onClick={isSold === 0 ? () => setBid(!isBid) : false} variant="" disabled={isSold === 0 ? true : false} className="car-card-purchase-btn">Bid Price</Button>
+        <Button onClick={isSold !== 0 ? () => setBid(!isBid) : () => false} variant="" disabled={isSold === 0 ? true : false} className="car-card-purchase-btn">Bid Price</Button>
         {/* car buy information */}
-        <Button onClick={isSold === 0 ? () => setBuy(!isBuy) : false} variant="" disabled={isSold === 0 ? true : false} className="car-card-purchase-btn">Buy Now</Button>
+        <Button onClick={isSold !== 0 ? () => setBuy(!isBuy) : () => false} variant="" disabled={isSold === 0 ? true : false} className="car-card-purchase-btn">Buy Now</Button>
       </div>
 
       {/* car sold btn */}
@@ -82,7 +85,11 @@ function CarCard({ address, car, balance, fetchBalance, buyCar, bidCar }) {
             <Form.Control className="formInput" variant="dark" type="number" id="biddingPrice" placeholder="Bidding price in ALGO" onChange={(e) => setBiddingPrice(e.target.value)} />
           </Form>
           <br />
-          <Button onClick={() => bidNowFunc(biddingPrice)} variant="" className="car-card-confirm-trans-btn">
+          <Button
+            onClick={() => bidNowFunc(biddingPrice)}
+            disabled={!isBidFormFilled()}
+            variant=""
+            className="car-card-confirm-trans-btn">
             Confirm Transaction
           </Button>
         </div>

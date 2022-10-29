@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import CarCard from '../CarCard/CarCard';
 import Loader from "../../Loader";
-import { buyCarAction, getCarsAction } from "../../../utils/carmio";
+import { buyCarAction, getCarsAction, bidCarAction } from "../../../utils/carmio";
 import { NotificationSuccess, NotificationError } from "../../Notifications";
 import { toast } from "react-toastify";
 
@@ -40,13 +40,25 @@ const Cars = ({ carSection, address, balance, fetchBalance }) => {
                 fetchBalance(address);
             })
             .catch(error => {
-                console.log(error)
                 toast(<NotificationError text="Failed to purchase car." />);
                 setLoading(false);
             })
     };
 
-    const bidCar = async (car, biddingPrice) => { };
+    const bidCar = async (car, biddingPrice) => {
+        setLoading(true);
+        bidCarAction(address, car, biddingPrice)
+            .then(() => {
+                toast(<NotificationSuccess text="Car bid successfully" />);
+                getCars();
+                fetchBalance(address);
+            })
+            .catch(error => {
+                console.log(error)
+                toast(<NotificationError text="Failed to bid car." />);
+                setLoading(false);
+            })
+    };
 
     if (loading) {
         return <Container className="m-5">
