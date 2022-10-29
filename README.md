@@ -1,8 +1,7 @@
 # Carmio
 
 ### An Algorand dApp Car Bidding.
-This Dapp allow you to bid car pricing without limited time window, also giving to the option to buy up straight at initial pricing
-based on the market.
+This Dapp allow you to bid car pricing without limited time window, also giving to the option to buy up straight at initial pricing based on the market. Bidding price automatically updates and placing a new accepted bid. Bidding price can't be less than previous bidding.
 
 ### Dacade
 Visit [Dacade.org](https://dacade.org/) to learn more on blockchain technology like ethereum, smart contracts and more.
