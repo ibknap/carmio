@@ -57,6 +57,17 @@
     padding: 0px 15px !important;
 }
 
+.car-sold-btn {
+    position: absolute !important;
+    top: 5px;
+    left: 5px;
+    padding: 3px 10px !important;
+    font-size: 12px !important;
+    border-radius: 0 !important;
+    background: #f8d7da !important;
+    color: #842029 !important;
+}
+
 .car-card-detail-btn {
     position: absolute !important;
     top: 5px;

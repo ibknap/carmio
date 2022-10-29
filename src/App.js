@@ -2,11 +2,11 @@ import React, { useState, useRef } from "react";
 import Header from "./components/Header/Header";
 import headerImg from "./assets/header_img.png";
 import CusNavbar from "./components/Navbar/Navbar";
-import CarContainer from "./components/Car/CarContainer/CarContainer";
+import Cars from "./components/Car/Cars/Cars";
 import Footer from './components/Footer/Footer';
 import { indexerClient, myAlgoConnect } from "./utils/constants";
 import { NotificationError } from "./components/Notifications";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import logo from "./assets/logo.png";
 import './App.css';
 
@@ -17,8 +17,9 @@ function App() {
   const [balance, setBalance] = useState(0);
   // variables
   const avatar = "https://library.kissclipart.com/20191116/wze/kissclipart-avatar-icon-awesome-set-icon-forum-user-icon-18f64889026582d3.png";
-  const goToCarContainer = () => carSection.current?.scrollIntoView({ behavior: 'smooth' });
+  const goToCars = () => carSection.current?.scrollIntoView({ behavior: 'smooth' });
 
+  // fetch balance
   const fetchBalance = async (accountAddress) => {
     indexerClient.lookupAccountByID(accountAddress).do()
       .then((response) => {
@@ -30,6 +31,7 @@ function App() {
       });
   };
 
+  // connect to wallet
   const connectWallet = async () => {
     myAlgoConnect.connect()
       .then(accounts => {
@@ -42,6 +44,7 @@ function App() {
       })
   };
 
+  // disconnect from wallet
   const disconnectWallet = () => {
     setAddress(null);
     setBalance(null);
@@ -50,8 +53,8 @@ function App() {
   return (
     <div className="App">
       <CusNavbar login={connectWallet} logout={disconnectWallet} logo={logo} balance={balance} address={address} avatar={avatar} />
-      <Header headerImg={headerImg} goToCarContainer={goToCarContainer} />
-      {address && <CarContainer carSection={carSection} address={address} balance={balance}/>}
+      <Header headerImg={headerImg} goToCars={goToCars} />
+      {address && <Cars carSection={carSection} address={address} balance={balance} fetchBalance={fetchBalance} />}
       <Footer />
     </div>
   );

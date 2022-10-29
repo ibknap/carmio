@@ -1,0 +1,83 @@
+#pragma version 6
+txn ApplicationID
+int 0
+==
+bnz main_l8
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l7
+txna ApplicationArgs 0
+byte "buy"
+==
+bnz main_l6
+txna ApplicationArgs 0
+byte "bid"
+==
+bnz main_l5
+err
+main_l5:
+byte "CURRENT BIDDING"
+txna ApplicationArgs 4
+btoi
+app_global_put
+int 1
+return
+main_l6:
+byte "SOLD"
+byte "SOLD"
+app_global_get
+int 1
++
+app_global_put
+int 1
+return
+main_l7:
+txn Sender
+global CreatorAddress
+==
+return
+main_l8:
+txn NumAppArgs
+int 6
+==
+assert
+txn Note
+byte "carmio-contract:v1"
+==
+assert
+txna ApplicationArgs 3
+btoi
+int 0
+>
+assert
+txna ApplicationArgs 4
+btoi
+int 0
+>
+assert
+byte "IMAGE"
+txna ApplicationArgs 0
+app_global_put
+byte "NAME"
+txna ApplicationArgs 1
+app_global_put
+byte "BRAND"
+txna ApplicationArgs 2
+app_global_put
+byte "INITIAL PRICE"
+txna ApplicationArgs 3
+btoi
+app_global_put
+byte "CURRENT BIDDING"
+txna ApplicationArgs 4
+btoi
+app_global_put
+byte "DESCRIPTION"
+txna ApplicationArgs 5
+app_global_put
+byte "SOLD"
+int 0
+app_global_put
+int 1
+return

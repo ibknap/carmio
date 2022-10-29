@@ -1,23 +1,28 @@
 import React, { useState } from "react"
 import PropTypes from 'prop-types';
 import { Card, Button, Alert, Form } from "react-bootstrap";
-import { microAlgosToString } from '../../../utils/conversions';
+import { microAlgosToString, truncateCarName } from '../../../utils/conversions';
 import './CarCard.css';
 
-function CarCard({ car, balance, buyCar, bidCar }) {
+function CarCard({ address, car, balance, fetchBalance, buyCar, bidCar }) {
   const { image, name, brand, initialPrice, currentBidding, description, sold } = car;
+
   const [isDetail, setDetail] = useState(false)
   const [biddingPrice, setBiddingPrice] = useState(0)
   const [isBid, setBid] = useState(false)
   const [isBuy, setBuy] = useState(false)
 
+  let isSold = parseInt(microAlgosToString(sold));
+
   function buyNowFunc() {
     buyCar(car);
+    fetchBalance(address)
     setBuy(!isBuy);
   }
 
   function bidNowFunc() {
     bidCar(car, biddingPrice);
+    fetchBalance(address)
     setBid(!isBid);
   }
 
@@ -27,23 +32,25 @@ function CarCard({ car, balance, buyCar, bidCar }) {
 
       {/* car basic information */}
       <Card.Body className="car-card-info">
-        <Card.Title>{name}</Card.Title>
+        <Card.Title>{truncateCarName(name)}</Card.Title>
         <Card.Subtitle className="car-card-subtitle">{brand}</Card.Subtitle>
         <Card.Text className="car-card-sub-others">
           Initial price: <b>{microAlgosToString(initialPrice)} ALGO</b>
           <br />
           Current bidding: <b>{microAlgosToString(currentBidding)} ALGO</b>
           <br />
-          {microAlgosToString(sold)}
         </Card.Text>
       </Card.Body>
 
       <div className="car-card-purchase-container">
         {/* car bid information */}
-        <Button onClick={() => setBid(!isBid)} variant="" className="car-card-purchase-btn">Bid Price</Button>
+        <Button onClick={isSold === 0 ? () => setBid(!isBid) : false} variant="" disabled={isSold === 0 ? true : false} className="car-card-purchase-btn">Bid Price</Button>
         {/* car buy information */}
-        <Button onClick={() => setBuy(!isBuy)} variant="" className="car-card-purchase-btn">Buy Now</Button>
+        <Button onClick={isSold === 0 ? () => setBuy(!isBuy) : false} variant="" disabled={isSold === 0 ? true : false} className="car-card-purchase-btn">Buy Now</Button>
       </div>
+
+      {/* car sold btn */}
+      {isSold === 0 ? <div className="car-sold-btn">Sold</div> : ""}
 
       {/* car detail card information */}
       <Button onClick={() => setDetail(!isDetail)} variant="" className="car-card-detail-btn">Details</Button>
@@ -107,8 +114,10 @@ function CarCard({ car, balance, buyCar, bidCar }) {
 
 CarCard.propTypes = {
   goToCarSection: PropTypes.func,
+  address: PropTypes.string.isRequired,
   car: PropTypes.instanceOf(Object).isRequired,
   balance: PropTypes.number,
+  fetchBalance: PropTypes.func.isRequired,
   buyCar: PropTypes.func.isRequired,
   bidCar: PropTypes.func.isRequired,
 };

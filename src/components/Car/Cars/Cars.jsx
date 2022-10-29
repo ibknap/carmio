@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import CarCard from '../CarCard/CarCard';
 import Loader from "../../Loader";
-import { buyCarAction, bidCarAction, deleteCarAction, getCarsAction } from "../../../utils/carmio";
+import { buyCarAction, getCarsAction } from "../../../utils/carmio";
 import { NotificationSuccess, NotificationError } from "../../Notifications";
 import { toast } from "react-toastify";
 
-const CarContainer = ({ carSection, address, balance }) => {
+const Cars = ({ carSection, address, balance, fetchBalance }) => {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -21,21 +21,23 @@ const CarContainer = ({ carSection, address, balance }) => {
             })
             .catch(error => {
                 console.log(error);
-                toast(<NotificationError text="Could not get cars details" />);
-
             })
             .finally(_ => {
                 setLoading(false);
             });
     };
 
+    useEffect(() => {
+        getCars();
+    }, []);
+
     const buyCar = async (car) => {
         setLoading(true);
         buyCarAction(address, car)
-            .then((success) => {
-                console.log(success)
+            .then(() => {
                 toast(<NotificationSuccess text="Car bought successfully" />);
                 getCars();
+                fetchBalance(address);
             })
             .catch(error => {
                 console.log(error)
@@ -44,23 +46,7 @@ const CarContainer = ({ carSection, address, balance }) => {
             })
     };
 
-    const bidCar = async (car, biddingPrice) => {
-        setLoading(true);
-        bidCarAction(address, car, biddingPrice)
-            .then(() => {
-                toast(<NotificationSuccess text="Car bid successfully" />);
-                getCars();
-            })
-            .catch(error => {
-                console.log(error)
-                toast(<NotificationError text="Failed to bid car." />);
-                setLoading(false);
-            })
-    };
-
-    useEffect(() => {
-        getCars();
-    }, []);
+    const bidCar = async (car, biddingPrice) => { };
 
     if (loading) {
         return <Container className="m-5">
@@ -81,7 +67,7 @@ const CarContainer = ({ carSection, address, balance }) => {
             <Row>
                 {cars.map((car, index) => (
                     <Col key={index} sm={3} className="mt-5">
-                        <CarCard car={car} balance={balance} buyCar={buyCar} bidCar={bidCar}/>
+                        <CarCard address={address} car={car} balance={balance} fetchBalance={fetchBalance} buyCar={buyCar} bidCar={bidCar} />
                     </Col>
                 ))}
             </Row>
@@ -89,10 +75,11 @@ const CarContainer = ({ carSection, address, balance }) => {
     );
 };
 
-CarContainer.propTypes = {
+Cars.propTypes = {
     goToCarSection: PropTypes.func,
-    address: PropTypes.string,
+    address: PropTypes.string.isRequired,
     balance: PropTypes.number,
+    fetchBalance: PropTypes.func.isRequired,
 };
 
-export default CarContainer;
+export default Cars;
