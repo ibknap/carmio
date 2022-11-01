@@ -48,6 +48,7 @@ class Carmio:
     def buy(self):
         Assert(
             And(
+                App.globalGet(self.Variables.owner) != Txn.sender(),
                 Global.group_size() == Int(2),
                 Gtxn[1].type_enum() == TxnType.Payment,
                 Gtxn[1].receiver() == Global.creator_address(),
@@ -71,6 +72,7 @@ class Carmio:
     def bid(self):
         Assert(
             And(
+                App.globalGet(self.Variables.owner) != Txn.sender(),
                 Global.group_size() == Int(2),
                 Gtxn[1].type_enum() == TxnType.Payment,
                 Gtxn[1].receiver() == Global.creator_address(),
