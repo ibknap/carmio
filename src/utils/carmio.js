@@ -77,19 +77,18 @@ export const createCarAction = async (senderAddress, car) => {
 
     // Sign & submit the transaction
     let signedTxn = await myAlgoConnect.signTransaction(txn.toByte());
-    console.log("Signed transaction with txID: %s", txId);
+    
     await algodClient.sendRawTransaction(signedTxn.blob).do();
 
     // Wait for transaction to be confirmed
     let confirmedTxn = await algosdk.waitForConfirmation(algodClient, txId, 4);
 
-    // Get the completed Transaction
-    console.log("Transaction " + txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
+   
 
     // Get created application id and notify about completion
     let transactionResponse = await algodClient.pendingTransactionInformation(txId).do();
     let appId = transactionResponse['application-index'];
-    console.log("Created new app-id: ", appId);
+    
     return appId;
 }
 
@@ -127,14 +126,13 @@ export const buyCarAction = async (senderAddress, car) => {
 
     // Sign & submit the group transaction
     let signedTxn = await myAlgoConnect.signTransaction(txnArray.map(txn => txn.toByte()));
-    console.log("Signed group transaction");
+    
     let tx = await algodClient.sendRawTransaction(signedTxn.map(txn => txn.blob)).do();
 
     // Wait for group transaction to be confirmed
     let confirmedTxn = await algosdk.waitForConfirmation(algodClient, tx.txId, 4);
 
-    // Notify about completion
-    console.log("Group transaction " + tx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
+    
 }
 
 
@@ -172,14 +170,13 @@ export const bidCarAction = async (senderAddress, car, biddingPrice) => {
 
     // Sign & submit the group transaction
     let signedTxn = await myAlgoConnect.signTransaction(txnArray.map(txn => txn.toByte()));
-    console.log("Signed group transaction");
+    
     let tx = await algodClient.sendRawTransaction(signedTxn.map(txn => txn.blob)).do();
 
     // Wait for group transaction to be confirmed
     let confirmedTxn = await algosdk.waitForConfirmation(algodClient, tx.txId, 4);
 
-    // Notify about completion
-    console.log("Group transaction " + tx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
+    
 }
 
 
